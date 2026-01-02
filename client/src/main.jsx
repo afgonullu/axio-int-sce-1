@@ -5,7 +5,10 @@ import App from './App.jsx';
 import './index.css';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  // In sandboxes (and most hosted environments), "localhost" from the browser
+  // does NOT point to the container. Default to same-origin `/graphql` and let
+  // Vite proxy it in dev. Override with `VITE_GRAPHQL_URL` when needed.
+  uri: import.meta.env.VITE_GRAPHQL_URL ?? '/graphql',
   cache: new InMemoryCache(),
 });
 

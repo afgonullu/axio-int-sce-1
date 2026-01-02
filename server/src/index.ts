@@ -51,9 +51,11 @@ const start = async () => {
   });
 
   const port = Number(process.env.PORT ?? 4000);
+  const host = process.env.HOST ?? '0.0.0.0';
 
   const { url } = await startStandaloneServer(server, {
-    listen: { port },
+    // Bind to 0.0.0.0 so sandbox/proxy networking can reach the server.
+    listen: { port, host },
   });
 
   // eslint-disable-next-line no-console
